@@ -1,0 +1,41 @@
+export const lightColors = {
+  primary: '#FFFFFF',
+  white: '#FFFFFF',
+  black: '#000000',
+  lightBlack: '#656565',
+  textGrey: '#AAACA6',
+  offwhite: '#90918C',
+  textColor: '#727272',
+  colorgTrans: 'rgba(0,0,0,0.15)',
+  red: '#e53a35',
+  colorwTrans: 'rgba(255,255,255,0.7)',
+  transparent: 'transparent',
+  button_bg: '#49CB67',
+  card_bg: '#42493F',
+  text_gray: '#6D7687',
+  otp_bg: '#1F1F1F',
+  otp_bg_selected: '#333333',
+  sliderView_color: '#2D3A4D',
+};
+
+export const darkColors = {
+  primary: '#1A1C19',
+  white: '#FFFFFF',
+  black: '#000000',
+  lightBlack: '#656565',
+  textGrey: '#AAACA6',
+  offwhite: '#90918C',
+  textColor: '#727272',
+  colorgTrans: 'rgba(0,0,0,0.15)',
+  red: '#e53a35',
+  colorwTrans: 'rgba(255,255,255,0.7)',
+  transparent: 'transparent',
+  button_bg: '#49CB67',
+  card_bg: '#42493F',
+  text_gray: '#6D7687',
+  otp_bg: '#1F1F1F',
+  otp_bg_selected: '#333333',
+  sliderView_color: '#2D3A4D',
+};
+
+export type Colors = typeof lightColors;
