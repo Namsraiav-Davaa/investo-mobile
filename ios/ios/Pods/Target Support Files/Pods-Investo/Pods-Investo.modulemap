@@ -1,0 +1,6 @@
+module Pods_Investo {
+  umbrella header "Pods-Investo-umbrella.h"
+
+  export *
+  module * { export * }
+}
