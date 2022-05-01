@@ -24,6 +24,7 @@ import {TextInput} from 'react-native-gesture-handler';
 import IconFile from '../common/CommonFontIcon';
 import ButtonView_1 from '../common/ButtonView_1';
 import ButtonView_red_1 from '../common/ButtonView_red_1';
+import messaging from '@react-native-firebase/messaging';
 
 export default class HomePage extends Component {
   constructor(props) {
@@ -96,6 +97,22 @@ export default class HomePage extends Component {
       isReferralSheetvisible: false,
     };
   }
+
+  componentDidMount() {
+    this.requestUserPermission();
+  }
+
+  async requestUserPermission() {
+    const authStatus = await messaging().requestPermission();
+    const enabled =
+      authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
+      authStatus === messaging.AuthorizationStatus.PROVISIONAL;
+  
+    if (enabled) {
+      console.log('Authorization status:', authStatus);
+    }
+  }
+
   UNSAFE_componentWillMount() {
     this.setState({
       isBottomSheetvisible: false,

@@ -41,15 +41,6 @@ export default class Header extends Component {
             height: 50,
           }}
         >
-          {/* <Image
-            source={require('../assets/back_icon.png')}
-            resizeMode="contain"
-            style={{
-              width: 25,
-              height: 25,
-              tintColor: COLORS.white,
-            }}
-          /> */}
           {headerType === 'auth' ? (
             <IconFile.SvgIcon
               name={'Back_arrow_icon'}

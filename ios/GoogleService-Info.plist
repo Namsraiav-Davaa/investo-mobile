@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>1020128915093-7vilhejdob7ut20b49ec54rib7k2sk8a.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.1020128915093-7vilhejdob7ut20b49ec54rib7k2sk8a</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCnCs7nEqY92UNL0jLRNQgjzSv8iKnBHrw</string>
+	<key>GCM_SENDER_ID</key>
+	<string>1020128915093</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.investo</string>
+	<key>PROJECT_ID</key>
+	<string>investo-skeleton</string>
+	<key>STORAGE_BUCKET</key>
+	<string>investo-skeleton.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:1020128915093:ios:ee277ca3330dbcdb34b59c</string>
+</dict>
+</plist>

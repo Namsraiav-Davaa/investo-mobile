@@ -1,165 +1,104 @@
-import React, {Component} from 'react';
+import React, {useRef} from 'react';
 import {
   View,
   Text,
-  TextInput,
-  Image,
-  TouchableOpacity,
-  ImageBackground,
-  Platform,
-  ScrollView,
   StyleSheet,
+  Pressable,
 } from 'react-native';
-import {COLORS, FONTS_SIZE, FONTS, BASE_URL} from '../common/utils';
+import { widthPercentageToDP } from 'react-native-responsive-screen';
+import SignatureScreen from "react-native-signature-canvas";
+import { hp, wp } from '../helpers/responsiveMetrics';
+import Edit from 'react-native-vector-icons/AntDesign';
+import { FONTS, FONTS_SIZE } from '../common/utils';
 
-import TextCommonRegular from '../common/TextCommonRegular';
-import RNSketchCanvas from './signature_file/';
+export default function Kyc_six(props) {
 
-export default class Kyc_six extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      conformsingature: '',
-      touchEnabled: true,
-      signaturestart: 0,
-    };
-  }
+  const ref = useRef(null);
 
-  render() {
-    return (
-      <View
-        style={{
-          width: '100%',
-          height: '100%',
-          backgroundColor: COLORS.primary,
-          paddingLeft: 25,
-          paddingRight: 25,
-        }}
-      >
-        <View style={{}}>
-          <RNSketchCanvas
-            containerStyle={{
-              backgroundColor: COLORS.card_bg,
-              borderRadius: 15,
-              height: '90%',
-            }}
-            canvasStyle={{
-              backgroundColor: 'transparent',
-              width: '95%',
-              height: '95%',
-              alignSelf: 'center',
-              borderRadius: 15,
-              // borderWidth: 1,
-              // borderColor: "green"
-            }}
-            onStrokeStart={value => this.setState({signaturestart: value})}
-            defaultStrokeIndex={0}
-            touchEnabled={this.state.touchEnabled}
-            defaultStrokeWidth={5}
-            // clearComponent={
-            //   <View
-            //     style={{
-            //       height: 50,
-            //       //   position: 'absolute',
-            //       //   bottom: -90,
-            //       width: '100%',
-            //       backgroundColor: 'red',
-            //     }}>
-            //     <TextCommonRegular
-            //       text={'SIGN AGAIN'}
-            //       color={COLORS.white}
-            //       numberOfLines={1}
-            //       onClickText={() => {
-            //         this.setState({
-            //           touchEnabled: true,
-            //           signaturestart: 0,
-            //           conformsingature: '',
-            //         });
-            //       }}
-            //       fontSize={FONTS_SIZE.txt_16}
-            //       // marginTop={10}
-            //       textAlign={'center'}
-            //       height={60}
-            //     />
-            //   </View>
-            // }
-            clearComponent={
-              <View
-                style={{
-                  height: 50,
-                  position: 'absolute',
-                  bottom: -90,
-                  width: '100%',
-                }}
-              >
-                <Text
-                  style={{
-                    color: COLORS.white,
-                    fontSize: FONTS_SIZE.txt_14,
-                    fontFamily: FONTS.FontMedium,
-                    textAlign: 'center',
-                  }}
-                >
-                  SIGN AGAIN
-                </Text>
-              </View>
-            }
-            onClearPressed={() =>
-              this.setState({
-                touchEnabled: true,
-                signaturestart: 0,
-                conformsingature: '',
-              })
-            }
-            // localSourceImage={srcImage}
-            // saveComponent={this.state.signaturestart === 0 ? null : this.state.conformsingature === '' ? <View style={{
-            //     marginHorizontal: 2.5, marginVertical: 8, height: 30, width: 120,
-            //     backgroundColor: 'red', justifyContent: 'center', alignItems: 'center', borderRadius: 5,
-            // }}><Text style={{ color: 'white' }}>{"this.state.CONFIRM_SIGNATURE_LBL"}</Text></View> :
-            //     null}
-            savePreference={() => {
-              return {
-                folder: 'RNSketchCanvas',
-                filename: String(Math.ceil(Math.random() * 100000000)),
-                transparent: false,
-                imageType: 'png',
-              };
-            }}
-            onSketchSaved={(success, path) => {
-              this.setState({
-                signatureobj: {
-                  name: 'savesignature',
-                  type: 'image/jpeg',
-                  uri: `file://${path}`,
-                },
-                conformsingature: 'click',
-                touchEnabled: false,
-              });
-              // Alert.alert(success ? 'Image saved!' : 'Failed to save image!', path)
-            }}
-            onPathsChange={pathsCount => {
-              console.log('pathsCount', pathsCount);
-            }}
-          />
-        </View>
-      </View>
-    );
-  }
+  // Called after ref.current.readSignature() reads a non-empty base64 string
+  const handleOK = (signature) => {
+    console.log(signature);
+    // onOK(signature); // Callback from Component props
+  };
+
+  // Called after ref.current.readSignature() reads an empty string
+  const handleEmpty = () => {
+    console.log("Empty");
+  };
+
+  // Called after ref.current.clearSignature()
+  const handleClear = () => {
+    ref.current.clearSignature();
+    console.log("clear success!");
+  };
+
+  // Called after end of stroke
+  const handleEnd = () => {
+    ref.current.readSignature();
+  };
+
+  // Called after ref.current.getData()
+  const handleData = (data) => {
+    console.log(data);
+  };
+
+const imgWidth = wp(86);
+const imgHeight = hp(55);
+const style = `.m-signature-pad {box-shadow: none; border: none; } 
+              .m-signature-pad--body {border: none;}
+              .m-signature-pad--footer {display: none; margin: 0px;}
+              body,html {
+              width: ${imgWidth}px; height: ${imgHeight}px;}`;
+
+  return (
+    <View>
+    <View style={styles.container}>
+      <SignatureScreen
+        ref={ref}
+        overlayWidth={imgWidth}
+        overlayHeight={imgHeight}
+        webStyle={style}
+        onOK={handleOK}
+      />
+    </View>
+    <Pressable onPress={handleClear} style={styles.edit}>
+        <Edit color={'white'} size={20} name='edit' />
+        <Text style={styles.text}>
+        Дахин зурах
+        </Text>
+      </Pressable>
+    </View>
+  );
 }
-const Kycstyle = StyleSheet.create({
-  textStyle: {
-    fontSize: FONTS_SIZE.txt_14,
-    color: COLORS.textColor,
-    fontFamily: FONTS.FontRegular,
-    textAlign: 'center',
-    writingDirection: 'auto',
-    lineHeight: 36,
+
+// const webStyle = `.m-signature-pad {box-shadow: none; border: none; } 
+// .m-signature-pad--body {border: none;}
+// .m-signature-pad--footer {display: none; margin: 0px;}`;
+
+const styles = StyleSheet.create({
+  container: {
+    alignSelf: 'center',
+    width: wp(86),
+    borderRadius: wp(2),
+    overflow: 'hidden',
+    height: hp(55),
   },
-  textStyle_grren: {
-    color: COLORS.button_bg,
-    fontSize: FONTS_SIZE.txt_16,
-    fontFamily: FONTS.FontRegular,
-    padding: 5,
-    textAlign: 'center',
+  edit: {
+    flexDirection: 'row',
+    alignSelf: 'center',
+    alignItems: 'center',
+    marginTop: wp(4),
+  },
+  text: {
+    color: 'white',
+    marginLeft: wp(2),
+    fontFamily: FONTS.FontMedium,
+    fontSize: FONTS_SIZE.txt_14,
+    textTransform: 'uppercase',
+    
+  },
+  signatureView: {
+    borderRadius: widthPercentageToDP(2),
+    overflow: 'hidden',
   },
 });
